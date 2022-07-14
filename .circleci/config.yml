@@ -6,7 +6,7 @@ jobs:
     docker:
       # The primary container is an instance of the first image listed. The job's commands run in this container.
       - image: maven:3.6.3-openjdk-8
-    working_directory: ~/target
+    working_directory: ~/app
     steps:
       - checkout
       # Install and run Maven
@@ -18,10 +18,10 @@ jobs:
           command: 'mvn compile package'
       # keep the files around for the scan job
       - persist_to_workspace:
-          root: app
-          #paths:
-           # - app
-           # - ./
+          root: ./
+          paths:
+            - app
+            - ./
   # job to upload to Veracode for scanning
   veracode_scan:
 
