@@ -36,13 +36,6 @@ jobs:
       - attach_workspace:
           at: ./
 
-     - run:
-          name: "debug"
-          command: |
-            pwd
-            cd app
-            ls 
-            
       # grab the Veracode agent
       - run:
           name: "Get the Veracode agent"
