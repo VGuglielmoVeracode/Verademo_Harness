@@ -6,13 +6,16 @@ jobs:
     docker:
       # The primary container is an instance of the first image listed. The job's commands run in this container.
       - image: maven:3.6.3-openjdk-8
-    working_directory: ~/app
+    working_directory: ~/target
     steps:
       - checkout
       # Install and run Maven
       #- run:
       #    name: Install Maven
       #    command: 'yum -y install maven'
+      - run: 
+          name: change directory
+          command: 'cd app'
       - run:
           name: Run Maven
           command: 'mvn compile package'
@@ -20,7 +23,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - app
+            - target
             - ./
   # job to upload to Veracode for scanning
   veracode_scan:
