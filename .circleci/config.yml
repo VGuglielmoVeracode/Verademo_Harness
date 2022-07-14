@@ -18,10 +18,10 @@ jobs:
           command: 'mvn compile package'
       # keep the files around for the scan job
       - persist_to_workspace:
-          root: ./
-          paths:
-            - app
-            - ./
+          root: app
+          #paths:
+           # - app
+           # - ./
   # job to upload to Veracode for scanning
   veracode_scan:
 
