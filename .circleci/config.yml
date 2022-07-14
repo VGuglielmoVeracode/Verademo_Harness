@@ -41,8 +41,8 @@ jobs:
           name: "Get the Veracode agent"
           command: |
             pwd
-            ls
-            ls app
+            cd app
+            ls 
             wget https://repo1.maven.org/maven2/com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/$VERACODE_WRAPPER_VERSION/vosp-api-wrappers-java-$VERACODE_WRAPPER_VERSION.jar -O veracode-wrapper.jar
             #chmod 755 veracode-wrapper.jar
 
