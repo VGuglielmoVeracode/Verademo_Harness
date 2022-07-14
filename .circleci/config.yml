@@ -101,7 +101,7 @@ jobs:
          name: "Unzip Veracode Pipeline Scan"
          command: |
            unzip -o pipeline-scan-LATEST.zip
-           pws
+           pwd
            ls
       - run:
          name: "Run Veracode Pipeline Scan  and create a baseline"
