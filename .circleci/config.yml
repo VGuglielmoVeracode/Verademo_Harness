@@ -40,7 +40,8 @@ jobs:
       - run:
           name: "Get the Veracode agent"
           command: |
-            cd app
+            pwd
+            ls
             wget https://repo1.maven.org/maven2/com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/$VERACODE_WRAPPER_VERSION/vosp-api-wrappers-java-$VERACODE_WRAPPER_VERSION.jar -O veracode-wrapper.jar
             #chmod 755 veracode-wrapper.jar
 
@@ -99,7 +100,8 @@ jobs:
       - run:
          name: "Unzip Veracode Pipeline Scan"
          command: |
-           unzip pipeline-scan-LATEST.zip -o
+           rm -rf pipeline-scan-LATEST
+           unzip pipeline-scan-LATEST.zip
       - run:
          name: "Run Veracode Pipeline Scan  and create a baseline"
          command: |
