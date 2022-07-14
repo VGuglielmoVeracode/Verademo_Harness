@@ -78,6 +78,7 @@ jobs:
       - run:
           name: "Veracode Agent Based Scan"
           command: |
+            cd app
             curl -sSL https://download.sourceclear.com/ci.sh | bash
 
  # job to perform a Veracode Pipeline Scan
