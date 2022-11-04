@@ -15,7 +15,7 @@ jobs:
       #    command: 'yum -y install maven'
       - run:
           name: Run Maven
-          command: 'mvn compile package -f app/pom.xml'
+          command: 'mvn compile package'
       # keep the files around for the scan job
       - persist_to_workspace:
           root: ./
@@ -35,7 +35,7 @@ jobs:
       # get the files from the previous job
       - attach_workspace:
           at: ./
-
+          
       # grab the Veracode agent
       - run:
           name: "Get the Veracode agent"
@@ -51,10 +51,10 @@ jobs:
               -vid $TEAM_ANALYSISCENTER_ID
               -vkey $TEAM_ANALYSISCENTER_KEY
               -action uploadandscan 
-              -appname "Verademo_circleci"
+              -appname "Verademo"
               -createprofile false 
               -version CircleCI-$CIRCLE_BUILD_NUM 
-              -filepath /root/target/app/target/verademo.war
+              -filepath ./target/verademo.war
  
  # job to upload to Veracode for Agent Based SCA scanning
   abs_scan:
@@ -78,7 +78,6 @@ jobs:
       - run:
           name: "Veracode Agent Based Scan"
           command: |
-            cd app
             curl -sSL https://download.sourceclear.com/ci.sh | bash
 
  # job to perform a Veracode Pipeline Scan
@@ -99,12 +98,10 @@ jobs:
          name: "Unzip Veracode Pipeline Scan"
          command: |
            unzip -o pipeline-scan-LATEST.zip
-           pwd
-           ls
       - run:
          name: "Run Veracode Pipeline Scan  and create a baseline"
          command: |
-           java -jar pipeline-scan.jar -vid $TEAM_ANALYSISCENTER_ID -vkey $TEAM_ANALYSISCENTER_KEY -f /root/target/app/target/verademo.war --json_output_file="baseline.json" || true
+           java -jar pipeline-scan.jar -vid $TEAM_ANALYSISCENTER_ID -vkey $TEAM_ANALYSISCENTER_KEY -f ./target/verademo.war --json_output_file="baseline.json" || true
 
 # serial jobs - need to run 'build' before 'scan'
 workflows:
