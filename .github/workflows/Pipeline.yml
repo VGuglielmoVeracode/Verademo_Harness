@@ -21,7 +21,7 @@ jobs:
       uses: wei/curl@master
       with:
         args: -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
-    
+   
     - name: Unzip the Pipeline Scanner
       run: unzip pipeline-scan-LATEST.zip pipeline-scan.jar
  
