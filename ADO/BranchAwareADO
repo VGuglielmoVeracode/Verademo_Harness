@@ -1,0 +1,55 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+# trigger:
+# - master
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+#The below will trigger a Policy scan vs a Pipeline scan based on branch names
+- task: Veracode@3
+  displayName: Veracode Policy Scan
+  condition: eq (variables['Build.SourceBranchName'],'dev')
+  inputs:
+    ConnectionDetailsSelection: 'Endpoint'
+    AnalysisService: 'Veracode Service Account API Key'
+    veracodeAppProfile: 'Verademo.net'
+    version: 'ADO - $(build.buildNumber)'
+    filepath: '$(Build.ArtifactStagingDirectory)/VeraDemoNet.zip'
+    maximumWaitTime: '360'
+
+- task: VeracodePipelineScan@0
+  displayName: Veracode Pipeline Scan
+  condition: eq (variables['Build.SourceBranchName'],'master')
+  inputs:
+    VeracodeAPIID: '$(vid)'
+    VeracodeAPIsecret: '$(vkey)'
+    fileToScan: '$(Build.ArtifactStagingDirectory)/VeraDemoNet.zip'
+    # baselineFileGeneration: true
+    # baselineFileStorageProject: 'verademo dot net'
+    # baselineFileStorageReponame: 'verademo dot net'
+    # baselineFileStorageBranch: 'refs/heads/master'
+    # baselineFileOptions: 'standard'
