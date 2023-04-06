@@ -24,3 +24,5 @@ jobs:
 
     - name: Start SAST scan
       run: java -jar VeracodeJavaAPI.jar -action uploadandscan -vid ${{ secrets.VERACODE_API_ID }} -vkey ${{ secrets.VERACODE_API_SECRET }} -appname VeraDemo -createprofile false -version "GitHub Actions job $GITHUB_RUN_NUMBER" -filepath /home/runner/work/verademo/verademo/target/verademo.war
+      
+      #
