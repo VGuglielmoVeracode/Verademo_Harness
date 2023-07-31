@@ -33,7 +33,7 @@ pipeline:
                     shell: Sh
                     command: |-
                       echo "Welcome to Harness CI"
-                      mvn -B package --file app/pom.xml
+                      mvn -B package --file pom.xml
               - step:
                   type: Run
                   name: Veracode Scanner
