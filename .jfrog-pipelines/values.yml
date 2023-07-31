@@ -18,9 +18,9 @@ publishBuild: true
 
 ##### Repository Details
 repo:
-  path: jfrog/jfrog-pipelines
-  gitIntegration: myGitIntegration
-  branchPattern: "^project_files$"
+  path: jmazoveracode/verademo
+  gitIntegration: GH
+  branchPattern: "jfrog"
 
 ##### Maven configuration
 mavenConfig:
