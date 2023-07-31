@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_verademo_1690836197521-push-trigger-input-set
+  identifier: Build_verademo_1690836197521pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_verademo_1690836197521
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
