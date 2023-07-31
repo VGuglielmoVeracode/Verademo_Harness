@@ -4,7 +4,7 @@
 namePrefix: mvn_template
 
 ## The name of your Artifactory integration
-artIntegration: myArtIntegration
+#artIntegration: myArtIntegration
 
 ##### Artifactory Build Info
 ## set this to `true` to publish a build
@@ -26,8 +26,8 @@ repo:
 mavenConfig:
   ## Here you specify the command to execute
 
-  command: clean install
-  sourceLocation: "./.jfrog-pipelines/template-MavenCI/sample-project"
+  command: clean install pom.xml
+  sourceLocation: "./src"
   ## These repos must first be created in Artifactory.
   ## resolver is used to resolve dependencies. It is recommended to
   ## use a remote repository so that any external dependencies will be cached
