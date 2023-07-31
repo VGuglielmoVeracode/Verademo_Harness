@@ -47,4 +47,4 @@ pipeline:
                       ls -l app
                       ls -l app/target
                       pwd
-                      java -jar VeracodeJavaAPI.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "Verademo" -version <+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness" -createsandbox true  -scantimeout 30 -filepath ./app/target/verademo.war
+                      java -jar VeracodeJavaAPI.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version <+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness" -createsandbox true  -scantimeout 30 -filepath /target/verademo.war
