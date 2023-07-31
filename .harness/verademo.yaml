@@ -6,7 +6,7 @@ pipeline:
   properties:
     ci:
       codebase:
-        connectorRef: account.Github_OAuth_1678720567504
+        connectorRef: account.Github_OAuth_1690836035770
         repoName: https://github.com/jmazoveracode/verademo
         build: <+input>
   stages:
