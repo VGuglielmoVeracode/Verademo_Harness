@@ -26,7 +26,7 @@ repo:
 mavenConfig:
   ## Here you specify the command to execute
 
-  command: mvn -B package --file ./pom.xml
+  command: mvn -B package --file pom.xml
   sourceLocation: "./src"
   ## These repos must first be created in Artifactory.
   ## resolver is used to resolve dependencies. It is recommended to
