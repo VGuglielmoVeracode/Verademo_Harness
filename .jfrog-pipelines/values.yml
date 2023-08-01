@@ -28,13 +28,13 @@ mavenConfig:
 
   command: mvn -B clean package --file pom.xml
 
-  sourceLocation: ./
+  sourceLocation: "./src"
   ## These repos must first be created in Artifactory.
   ## resolver is used to resolve dependencies. It is recommended to
   ## use a remote repository so that any external dependencies will be cached
   ## in your local Artifactory instance. Deployer is where your Artifacts
   ## will be uploaded.
-  resolverSnapshotRepo: templates-snapshot-remote
-  resolverReleaseRepo: templates-release-remote
-  deployerSnapshotRepo: templates-snapshot-local
-  deployerReleaseRepo: templates-release-local
+  resolverSnapshotRepo: verademo-maven-remote
+  resolverReleaseRepo: verademo-maven-remote
+  deployerSnapshotRepo: verademo-libs-snapshot-local
+  deployerReleaseRepo: verademo-libs-release-local
