@@ -26,8 +26,6 @@ repo:
 mavenConfig:
   ## Here you specify the command to execute
 
-  command: pwd
-  command: ls -l
   command: mvn -B clean package --file pom.xml
 
   #sourceLocation: "./src"
