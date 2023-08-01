@@ -28,7 +28,7 @@ mavenConfig:
 
   command: mvn -B clean package --file pom.xml
 
-  #sourceLocation: "./src"
+  sourceLocation: ./
   ## These repos must first be created in Artifactory.
   ## resolver is used to resolve dependencies. It is recommended to
   ## use a remote repository so that any external dependencies will be cached
