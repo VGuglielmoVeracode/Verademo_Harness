@@ -34,7 +34,12 @@ mavenConfig:
   ## use a remote repository so that any external dependencies will be cached
   ## in your local Artifactory instance. Deployer is where your Artifacts
   ## will be uploaded.
-  resolverSnapshotRepo: verademo-maven-remote
+  #resolverSnapshotRepo: verademo-maven-remote
+  #resolverReleaseRepo: verademo-maven-remote
+  #deployerSnapshotRepo: verademo-libs-snapshot-local
+  #deployerReleaseRepo: verademo-libs-release-local
+  resolverSnapshotRepo: verademo-maven-remote  
   resolverReleaseRepo: verademo-maven-remote
   deployerSnapshotRepo: verademo-libs-snapshot-local
   deployerReleaseRepo: verademo-libs-release-local
+  
