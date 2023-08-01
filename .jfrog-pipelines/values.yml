@@ -38,8 +38,8 @@ mavenConfig:
   #resolverReleaseRepo: verademo-maven-remote
   #deployerSnapshotRepo: verademo-libs-snapshot-local
   #deployerReleaseRepo: verademo-libs-release-local
-  resolverSnapshotRepo: verademo-maven-remote  
-  resolverReleaseRepo: verademo-maven-remote
+  resolverSnapshotRepo: verademo-libs-snapshot
+  resolverReleaseRepo: verademo-libs-release
   deployerSnapshotRepo: verademo-libs-snapshot-local
   deployerReleaseRepo: verademo-libs-release-local
   
