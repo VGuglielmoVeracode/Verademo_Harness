@@ -45,4 +45,4 @@ pipeline:
                       unzip vosp-api-wrappers-java-23.3.11.1-dist.zip
                       ls -l
                       pwd
-                      java -jar VeracodeJavaAPI.jar -vid <+secrets.getValue("VERACODEID")> -vkey <+secrets.getValue("VERACODEKEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness" -createsandbox true  -scantimeout 30 -filepath target/verademo.war
+                      java -jar VeracodeJavaAPI.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness" -createsandbox true  -scantimeout 30 -filepath target/verademo.war
