@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Verademo_Harness_1695058116093-pr-trigger-input-set
+  identifier: Build_Verademo_Harness_1695058116093prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: Verademo_Harness
+  pipeline:
+    identifier: Build_Verademo_Harness_1695058116093
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
