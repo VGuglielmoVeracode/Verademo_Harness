@@ -1,13 +1,13 @@
 pipeline:
   name: Build Java with Maven
-  identifier: Build_Java_with_Maven_1678720601015
-  projectIdentifier: default_project
+  identifier: Build_Verademo_Harness_1695058116093
+  projectIdentifier: Verademo_Harness
   orgIdentifier: default
   properties:
     ci:
       codebase:
-        connectorRef: account.Github_OAuth_1690836035770
-        repoName: jmazoveracode/verademo
+        connectorRef: account.Github_OAuth_1693612209080
+        repoName: vguglielmoveracode/Verademo_Harness
         build: <+input>
   stages:
     - stage:
@@ -45,4 +45,4 @@ pipeline:
                       unzip vosp-api-wrappers-java-23.3.11.1-dist.zip
                       ls -l
                       pwd
-                      java -jar VeracodeJavaAPI.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness" -createsandbox true  -scantimeout 30 -filepath target/verademo.war
+                      java -jar VeracodeJavaAPI.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness-VeraDemo" -createsandbox true  -scantimeout 30 -filepath target/verademo.war
