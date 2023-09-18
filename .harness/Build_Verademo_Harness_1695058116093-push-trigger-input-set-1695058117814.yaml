@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Verademo_Harness_1695058116093-push-trigger-input-set
+  identifier: Build_Verademo_Harness_1695058116093pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: Verademo_Harness
+  pipeline:
+    identifier: Build_Verademo_Harness_1695058116093
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
