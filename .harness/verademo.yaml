@@ -59,4 +59,5 @@ pipeline:
                         uses: veracode/veracode-sca@v2.1.9
                         env:
                           SRCCLR_API_TOKEN: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mzk0NzMxLCJleHAiOjE2OTY4NzQ3ODIsImF1dGhvcml0aWVzIjoiQUdFTlQiLCJqdGkiOiJhNzQ5MzkzNi1hYzI0LTRlMjAtYmY2OS04MmVjMTZhOWVhYTMiLCJjbGllbnRfaWQiOiIiLCJzY29wZSI6W119.mRxOne5i0J0l78OqlQycf5AznUgSCqUHZ2HBKegWdF7nr9s99RzyCXq2boBWF7VSh86BMBYD5UCLFiTE_Bidbr-MzYMtgFL4_X_xket1g58R8o4AU4VxYYDjmqSz5CTBQWqxexRu6M71eSh0T1do5xzJoWofu5ogDNOeNQ-rIo0
+                          github_token: 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
                       description: 3rd party dependency scan.
