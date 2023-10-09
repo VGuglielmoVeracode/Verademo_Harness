@@ -31,10 +31,7 @@ pipeline:
                   identifier: Build_Java_App
                   spec:
                     shell: Sh
-                    command: |-
-                      mvn -B package --file pom.xml
-                      ls -a
-                      pwd
+                    command: mvn -B package --file pom.xml
               - step:
                   type: Run
                   name: Veracode Static Analysis
@@ -43,4 +40,14 @@ pipeline:
                     connectorRef: dockerhubkey
                     image: veracode/api-wrapper-java
                     shell: Sh
-                    command: java -jar /opt/veracode/api-wrapper.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness-VeraDemo" -createsandbox true -filepath target/verademo.war
+                    command: |-
+                      java -jar /opt/veracode/api-wrapper.jar 
+                        -vid <+secrets.getValue("VERACODE_ID")> 
+                        -vkey <+secrets.getValue("VERACODE_KEY")> 
+                        -action UploadAndScan 
+                        -createprofile true 
+                        -appname "VeraDemo" 
+                        -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> 
+                        -sandboxname "Harness-VeraDemo" 
+                        -createsandbox true 
+                        -filepath target/verademo.war
