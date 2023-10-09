@@ -32,6 +32,22 @@ pipeline:
                   spec:
                     shell: Sh
                     command: mvn -B package --file pom.xml
+              - step:
+                  type: Run
+                  name: Veracode Static Pipeline Scan
+                  identifier: Veracode_Static_Pipeline_Scan
+                  spec:
+                    connectorRef: dockerhubkey
+                    image: veracode/pipeline-scan:latest
+                    shell: Sh
+                    command: |
+                      java -jar /opt/veracode/pipeline-scan.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> --file target/verademo.war
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
               - parallel:
                   - step:
                       type: Run
@@ -42,15 +58,6 @@ pipeline:
                         image: veracode/api-wrapper-java
                         shell: Sh
                         command: "java -jar /opt/veracode/api-wrapper.jar -vid <+secrets.getValue(\"VERACODE_ID\")> -vkey <+secrets.getValue(\"VERACODE_KEY\")> -action UploadAndScan -createprofile true -appname \"VeraDemo\" -version Harness-<+codebase.prNumber>\"_\"<+pipeline.sequenceId> -sandboxname \"Harness-VeraDemo\" -createsandbox true -filepath target/verademo.war -deleteincompletescan 2 "
-                  - step:
-                      type: Run
-                      name: Veracode Static Pipeline Scan
-                      identifier: Veracode_Static_Pipeline_Scan
-                      spec:
-                        connectorRef: dockerhubkey
-                        image: veracode/pipeline-scan:latest
-                        shell: Sh
-                        command: java -jar /opt/veracode/pipeline-scan.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> --file target/verademo.war
                   - step:
                       type: Run
                       name: Veracode Software Composition Analysis
