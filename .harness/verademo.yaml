@@ -32,8 +32,9 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |-
-                      echo "Welcome to Harness CI"
                       mvn -B package --file pom.xml
+                      ls -a
+                      pwd
               - step:
                   type: Run
                   name: Veracode Static Analysis
