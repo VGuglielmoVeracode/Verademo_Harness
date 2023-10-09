@@ -67,3 +67,12 @@ pipeline:
                         command: curl -sSL https://download.sourceclear.com/ci.sh | sh
                         envVariables:
                           SRCCLR_API_TOKEN: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mzk0NzMxLCJleHAiOjE2OTY4NzQ3ODIsImF1dGhvcml0aWVzIjoiQUdFTlQiLCJqdGkiOiJhNzQ5MzkzNi1hYzI0LTRlMjAtYmY2OS04MmVjMTZhOWVhYTMiLCJjbGllbnRfaWQiOiIiLCJzY29wZSI6W119.mRxOne5i0J0l78OqlQycf5AznUgSCqUHZ2HBKegWdF7nr9s99RzyCXq2boBWF7VSh86BMBYD5UCLFiTE_Bidbr-MzYMtgFL4_X_xket1g58R8o4AU4VxYYDjmqSz5CTBQWqxexRu6M71eSh0T1do5xzJoWofu5ogDNOeNQ-rIo0
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: dockerhubkey
+                    repo: veracodevg / verademoharness
+                    tags:
+                      - verademoharness
