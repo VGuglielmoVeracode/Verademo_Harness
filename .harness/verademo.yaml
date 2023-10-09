@@ -32,21 +32,31 @@ pipeline:
                   spec:
                     shell: Sh
                     command: mvn -B package --file pom.xml
-              - step:
-                  type: Run
-                  name: Veracode Static Policy Scan
-                  identifier: Veracode_Scanner
-                  spec:
-                    connectorRef: dockerhubkey
-                    image: veracode/api-wrapper-java
-                    shell: Sh
-                    command: java -jar /opt/veracode/api-wrapper.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness-VeraDemo" -createsandbox true -filepath target/verademo.war
-              - step:
-                  type: Run
-                  name: Veracode Static Pipeline Scan
-                  identifier: Veracode_Static_Pipeline_Scan
-                  spec:
-                    connectorRef: dockerhubkey
-                    image: veracode/pipeline-scan:latest
-                    shell: Sh
-                    command: java -jar /opt/veracode/pipeline-scan.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> --file target/verademo.war
+              - parallel:
+                  - step:
+                      type: Run
+                      name: Veracode Static Policy Scan
+                      identifier: Veracode_Scanner
+                      spec:
+                        connectorRef: dockerhubkey
+                        image: veracode/api-wrapper-java
+                        shell: Sh
+                        command: java -jar /opt/veracode/api-wrapper.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness-VeraDemo" -createsandbox true -filepath target/verademo.war
+                  - step:
+                      type: Run
+                      name: Veracode Static Pipeline Scan
+                      identifier: Veracode_Static_Pipeline_Scan
+                      spec:
+                        connectorRef: dockerhubkey
+                        image: veracode/pipeline-scan:latest
+                        shell: Sh
+                        command: java -jar /opt/veracode/pipeline-scan.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> --file target/verademo.war
+                  - step:
+                      type: Action
+                      name: Veracode Software Composition Analysis
+                      identifier: Veracode_Software_Composition_Analysis
+                      spec:
+                        uses: veracode/veracode-sca@v2.1.9
+                        env:
+                          SRCCLR_API_TOKEN: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mzk0NzMxLCJleHAiOjE2OTY4NzQ3ODIsImF1dGhvcml0aWVzIjoiQUdFTlQiLCJqdGkiOiJhNzQ5MzkzNi1hYzI0LTRlMjAtYmY2OS04MmVjMTZhOWVhYTMiLCJjbGllbnRfaWQiOiIiLCJzY29wZSI6W119.mRxOne5i0J0l78OqlQycf5AznUgSCqUHZ2HBKegWdF7nr9s99RzyCXq2boBWF7VSh86BMBYD5UCLFiTE_Bidbr-MzYMtgFL4_X_xket1g58R8o4AU4VxYYDjmqSz5CTBQWqxexRu6M71eSh0T1do5xzJoWofu5ogDNOeNQ-rIo0
+                      description: 3rd party dependency scan.
