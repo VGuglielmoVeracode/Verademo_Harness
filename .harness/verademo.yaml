@@ -31,12 +31,10 @@ pipeline:
                   identifier: Build_Java_App
                   spec:
                     shell: Sh
-                    command: |-
-                      echo "Welcome to Harness CI"
-                      mvn -B package --file pom.xml
+                    command: mvn -B package --file pom.xml
               - step:
                   type: Run
-                  name: Veracode_Scanner
+                  name: Veracode Static Analysis
                   identifier: Veracode_Scanner
                   spec:
                     connectorRef: dockerhubkey
