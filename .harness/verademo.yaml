@@ -36,15 +36,10 @@ pipeline:
                       mvn -B package --file pom.xml
               - step:
                   type: Run
-                  name: Veracode Scanner
+                  name: Veracode_Scanner
                   identifier: Veracode_Scanner
                   spec:
                     connectorRef: dockerhubkey
                     image: veracode/api-wrapper-java
                     shell: Sh
-                    command: |-
-                      #curl -O https://repo1.maven.org/maven2/com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/23.3.11.1/vosp-api-wrappers-java-23.3.11.1-dist.zip
-                      #unzip vosp-api-wrappers-java-23.3.11.1-dist.zip
-                      ls -l
-                      pwd
-                      java -jar VeracodeJavaAPI.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness-VeraDemo" -createsandbox true  -scantimeout 30 -filepath target/verademo.war
+                    command: java -jar /opt/veracode/api-wrapper.jar -vid <+secrets.getValue("VERACODE_ID")> -vkey <+secrets.getValue("VERACODE_KEY")> -action UploadAndScan -createprofile true -appname "VeraDemo" -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> -sandboxname "Harness-VeraDemo" -createsandbox true -scantimeout 30 -filepath target/verademo.war
