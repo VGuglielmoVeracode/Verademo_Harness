@@ -42,12 +42,12 @@ pipeline:
                     shell: Sh
                     command: |-
                       java -jar /opt/veracode/api-wrapper.jar 
-                        -vid <+secrets.getValue("VERACODE_ID")> 
-                        -vkey <+secrets.getValue("VERACODE_KEY")> 
-                        -action UploadAndScan 
-                        -createprofile true 
-                        -appname "VeraDemo" 
-                        -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> 
-                        -sandboxname "Harness-VeraDemo" 
-                        -createsandbox true 
-                        -filepath target/verademo.war
+                      -vid <+secrets.getValue("VERACODE_ID")> 
+                      -vkey <+secrets.getValue("VERACODE_KEY")> 
+                      -action UploadAndScan 
+                      -createprofile true 
+                      -appname "VeraDemo" 
+                      -version Harness-<+codebase.prNumber>"_"<+pipeline.sequenceId> 
+                      -sandboxname "Harness-VeraDemo" 
+                      -createsandbox true 
+                      -filepath target/verademo.war
